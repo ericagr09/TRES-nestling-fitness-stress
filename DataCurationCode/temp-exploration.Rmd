@@ -1,0 +1,192 @@
+---
+title: "temp-range-exploration"
+author: "Erica Griffin"
+date: "2026-03-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pacman::p_load(tidyverse, lubridate, here, dplyr, ggplot2)
+
+nestling_df <- read.csv(here("IntermediateData", "3-2-26_nestling_df.csv"))
+
+nestling_df <- nestling_df %>%
+  filter(!is.na(nestling_fate_bin))
+
+```
+
+
+# average max: hatch to day 4 
+```{r}
+ggplot(nestling_df,
+       aes(x = avg_max_hatch_4,
+           y = nestling_fate_bin)) +
+  geom_jitter(height = 0.05,
+              width = 0,
+              size = 2,
+              alpha = 0.4,
+              color = "pink") +
+  stat_smooth(method = "glm",
+              method.args = list(family = "binomial"),
+              color = "deeppink",
+              fill = "pink",
+              size = 1.5,
+              se = TRUE) +
+  xlab("Average Max Temp (Hatch–4)") +
+  ylab("Probability of Fledging") +
+  theme_bw()
+```
+
+# average max: day 5 to day 12
+```{r}
+ggplot(nestling_df,
+       aes(x = avg_max_5_12,
+           y = nestling_fate_bin)) +
+  geom_jitter(height = 0.05,
+              width = 0,
+              size = 2,
+              alpha = 0.4,
+              color = "pink") +
+  stat_smooth(method = "glm",
+              method.args = list(family = "binomial"),
+              color = "deeppink",
+              fill = "pink",
+              size = 1.5,
+              se = TRUE) +
+  xlab("Average Max Temp (day 5 - 12)") +
+  ylab("Probability of Fledging") +
+  theme_bw()
+```
+
+# average max: hatch to day 12
+```{r}
+ggplot(nestling_df,
+       aes(x = avg_max_hatch_12,
+           y = nestling_fate_bin)) +
+  geom_jitter(height = 0.05,
+              width = 0,
+              size = 2,
+              alpha = 0.4,
+              color = "pink") +
+  stat_smooth(method = "glm",
+              method.args = list(family = "binomial"),
+              color = "deeppink",
+              fill = "pink",
+              size = 1.5,
+              se = TRUE) +
+  xlab("Average Max Temp (hatch - 12)") +
+  ylab("Probability of Fledging") +
+  theme_bw()
+```
+
+
+# average max: day 13 and beyond 
+```{r}
+ggplot(nestling_df,
+       aes(x = avg_max_13_plus,
+           y = nestling_fate_bin)) +
+  geom_jitter(height = 0.05,
+              width = 0,
+              size = 2,
+              alpha = 0.4,
+              color = "pink") +
+  stat_smooth(method = "glm",
+              method.args = list(family = "binomial"),
+              color = "deeppink",
+              fill = "pink",
+              size = 1.5,
+              se = TRUE) +
+  xlab("Average Max Temp (day 13 and beyond)") +
+  ylab("Probability of Fledging") +
+  theme_bw()
+```
+
+
+# lowest 2 day max: hatch to day 4 
+```{r}
+ggplot(nestling_df,
+       aes(x = coldest_hatch_4,
+           y = nestling_fate_bin)) +
+  geom_jitter(height = 0.05,
+              width = 0,
+              size = 2,
+              alpha = 0.4,
+              color = "pink") +
+  stat_smooth(method = "glm",
+              method.args = list(family = "binomial"),
+              color = "deeppink",
+              fill = "pink",
+              size = 1.5,
+              se = TRUE) +
+  xlab("Coldest 2-day Max Temp (Hatch–4)") +
+  ylab("Probability of Fledging") +
+  theme_bw()
+```
+
+
+# lowest 2 day max: day 5 to day 12
+```{r}
+ggplot(nestling_df,
+       aes(x = coldest_5_12,
+           y = nestling_fate_bin)) +
+  geom_jitter(height = 0.05,
+              width = 0,
+              size = 2,
+              alpha = 0.4,
+              color = "pink") +
+  stat_smooth(method = "glm",
+              method.args = list(family = "binomial"),
+              color = "deeppink",
+              fill = "pink",
+              size = 1.5,
+              se = TRUE) +
+  xlab("Coldest 2-day Max Temp (day 5–12)") +
+  ylab("Probability of Fledging") +
+  theme_bw()
+```
+
+
+
+# lowest 2 day max: day 5 to day 12
+```{r}
+ggplot(nestling_df,
+       aes(x = coldest_hatch_12,
+           y = nestling_fate_bin)) +
+  geom_jitter(height = 0.05,
+              width = 0,
+              size = 2,
+              alpha = 0.4,
+              color = "pink") +
+  stat_smooth(method = "glm",
+              method.args = list(family = "binomial"),
+              color = "deeppink",
+              fill = "pink",
+              size = 1.5,
+              se = TRUE) +
+  xlab("Coldest 2-day Max Temp (Hatch–12)") +
+  ylab("Probability of Fledging") +
+  theme_bw()
+```
+
+
+# lowest 2 day max: day 13 plus
+```{r}
+ggplot(nestling_df,
+       aes(x = coldest_13_plus,
+           y = nestling_fate_bin)) +
+  geom_jitter(height = 0.05,
+              width = 0,
+              size = 2,
+              alpha = 0.4,
+              color = "pink") +
+  stat_smooth(method = "glm",
+              method.args = list(family = "binomial"),
+              color = "deeppink",
+              fill = "pink",
+              size = 1.5,
+              se = TRUE) +
+  xlab("Coldest 2-day Max Temp (day 13 plus)") +
+  ylab("Probability of Fledging") +
+  theme_bw()
+```
